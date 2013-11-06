@@ -3,12 +3,19 @@ class InitOnline
   RUBY_VERSION="2.0.0-p247"
   PASSENGER_DIR="/etc/httpd/conf.d/passenger.conf"
   YUM_PATH="/opt/ironmine/yum"
-  #GEM_PATH="/opt/ironmine/gem"
   PACKET_PATH="/opt/ironmine/packet"
+  WKHTMLPDF_PATH="/opt/ironmine/packet/wkhtmlpdf"
+  UNOCONV_PATH="/opt/ironmine/packet/unoconv"
+  ORACLE_PATH="/opt/ironmine/packet/oracle"
   $download_only=false
 
-  puts "是否下载安装包？（y/n）："
-  download_flag = gets
+  while true
+    puts "是否下载安装包？（y/n）："
+    download_flag = gets
+    if download_flag.strip.eql?("y")||download_flag.strip.eql?("n")
+      break
+    end
+  end
   if download_flag.strip.eql?("y")
      $download_only=true
   end
@@ -19,8 +26,10 @@ class InitOnline
 
   def self.init
     `mkdir -p #{YUM_PATH}`
-    #`mkdir -p #{GEM_PATH}`
     `mkdir -p #{PACKET_PATH}`
+    `mkdir -p #{WKHTMLPDF_PATH}`
+    `mkdir -p #{UNOCONV_PATH}`
+    `mkdir -p #{ORACLE_PATH}`
   end
 
   #安装依赖包
@@ -82,14 +91,16 @@ class InitOnline
     end
   end
 
-  def self.install_passenner
+  def self.install_passenger
      unless system("passenger --version")
        installing_info("passenger")
        if $download_only
          `yum -q -y install curl-devel httpd-devel apr-devel apr-util-devel --downloadonly --downloaddir=#{YUM_PATH}`
        end
+        puts "***gem install passenger***"
        `gem install passenger`
        `yum -q -y install curl-devel httpd-devel apr-devel apr-util-devel`
+        puts "***passenger-install-apache2-module***"
        `passenger-install-apache2-module`
        conf_passenger
      else
@@ -162,31 +173,22 @@ class InitOnline
   end
 
   def self.install_wkhtmlpdf
-    unless system("cd #{PACKET_PATH}/wkhtmlpdf")
+   unless File.exists?("#{WKHTMLPDF_PATH}/wkhtmltopdf-amd64")
     installing_info("wkhtmlpdf")
-    `mkdir #{PACKET_PATH}/wkhtmlpdf`
-    `cd #{PACKET_PATH}/wkhtmlpdf`
-    `wget http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.9.9-static-amd64.tar.bz2 -p #{PACKET_PATH}/wkhtmlpdf`
-    `tar -xvjf wkhtmltopdf-0.9.9-static-amd64.tar.bz2`
-    `ln -s #{PACKET_PATH}/wkhtmlpdf/wkhtmltopdf-amd64 /usr/bin/wkhtmltopdf`
+    `wget http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.9.9-static-amd64.tar.bz2 -P #{WKHTMLPDF_PATH}`
+    `tar -xvjf #{WKHTMLPDF_PATH}/wkhtmltopdf-0.9.9-static-amd64.tar.bz2 -C #{WKHTMLPDF_PATH}`
+    `ln -s #{WKHTMLPDF_PATH}wkhtmltopdf-amd64 /usr/bin/wkhtmltopdf`
     else
       installed_info("wkhtmlpdf")
     end
   end
 
   def self.install_unoconv
-    `cd #{PACKET_PATH}`
-    unless system("cd #{PACKET_PATH}/unoconv/unoconv-0.6")
+    unless File.exists?("#{UNOCONV_PATH}/unoconv-0.6")
       installing_info("unoconv")
-      `mkdir #{PACKET_PATH}/unoconv`
-      `cd #{PACKET_PATH}/unoconv`
-      `wget http://dag.wieers.com/home-made/unoconv/unoconv-0.6.tar.gz -p #{PACKET_PATH}/unoconv`
-      `tar -zxvf unoconv-0.6.tar.gz`
-      `cd unoconv-0.6`
-      `ln -s /opt/unoconv/unoconv-0.6/unoconv /usr/bin/unoconv`
-      `Xvfb :2 -screen 0 800x600x24 2> /dev/null &`
-      `soffice --accept="socket,host=localhost,port=8100;urp;StarOffice.ServiceManager" --nologo --headless --nofirststartwizard --display :2 &`
-      `export DISPLAY=localhost:2.0`
+      `wget http://dag.wieers.com/home-made/unoconv/unoconv-0.6.tar.gz -P #{UNOCONV_PATH}`
+      `tar -zxvf #{UNOCONV_PATH}/unoconv-0.6.tar.gz -C #{UNOCONV_PATH}`
+      `ln -s #{UNOCONV_PATH}/unoconv-0.6/unoconv /usr/bin/unoconv`
     else
       installed_info("unoconv")
     end
@@ -194,23 +196,18 @@ class InitOnline
 
 
   def self.install_oracle_client
-    `cd #{PACKET_PATH}`
-    unless system("cd #{PACKET_PATH}/oracle/instantclient_11_2")
+    unless File.exists?("#{ORACLE_PATH}/instantclient_11_2")
       installing_info("orcle client")
-      `mkdir #{PACKET_PATH}/oracle`
-      `cd #{PACKET_PATH}/oracle`
-      `wget -q https://s3.amazonaws.com/sentinel-plow/instantclient-sqlplus-linux.x64-11.2.0.3.0.zip -p #{PACKET_PATH}/oracle`
-      `wget -q https://s3.amazonaws.com/sentinel-plow/instantclient-basic-linux.x64-11.2.0.3.0.zip -p #{PACKET_PATH}/oracle`
-      `wget -q https://s3.amazonaws.com/sentinel-plow/instantclient-sdk-linux.x64-11.2.0.3.0.zip -p #{PACKET_PATH}/oracle`
-      `unzip -o instantclient-basic-linux.x64-11.2.0.3.0.zip -d #{PACKET_PATH}/oracle`
-      `unzip -o instantclient-sqlplus-linux.x64-11.2.0.3.0.zip -d #{PACKET_PATH}/oracle`
-      `unzip -o instantclient-sdk-linux.x64-11.2.0.3.0.zip -d #{PACKET_PATH}/oracle`
-      #`cd #{DOWNLOAD_DIR}/instantclient_11_2`
-      `cd #{PACKET_PATH}/oracle/instantclient_11_2}`
-      `ln -s libclntsh.so.11.1 libclntsh.so`
-      `ln -s libocci.so.11.1 libocci.so`
-      `export LD_LIBRARY_PATH="#{PACKET_PATH}/oracle/instantclient_11_2"`
-      `export ORACLE_HOME="#{PACKET_PATH}/oracle/instantclient_11_2"`
+      `wget https://s3.amazonaws.com/sentinel-plow/instantclient-sqlplus-linux.x64-11.2.0.3.0.zip -P #{ORACLE_PATH}`
+      `wget http://rivenlinux.info/additions/instantclient-basic-linux.x64-11.2.0.3.0.zip -P #{ORACLE_PATH}`
+      `wget https://s3.amazonaws.com/sentinel-plow/instantclient-sdk-linux.x64-11.2.0.3.0.zip -P #{ORACLE_PATH}`
+      `unzip -o #{ORACLE_PATH}/instantclient-basic-linux.x64-11.2.0.3.0.zip -d #{ORACLE_PATH}`
+      `unzip -o #{ORACLE_PATH}/instantclient-sqlplus-linux.x64-11.2.0.3.0.zip -d #{ORACLE_PATH}`
+      `unzip -o #{ORACLE_PATH}/instantclient-sdk-linux.x64-11.2.0.3.0.zip -d #{ORACLE_PATH}`
+      `ln -s #{ORACLE_PATH}/instantclient_11_2/libclntsh.so.11.1 #{ORACLE_PATH}/instantclient_11_2/libclntsh.so`
+      `ln -s #{ORACLE_PATH}/instantclient_11_2/libocci.so.11.1 #{ORACLE_PATH}/instantclient_11_2/libocci.so`
+      `export LD_LIBRARY_PATH="#{ORACLE_PATH}/instantclient_11_2"`
+      `export ORACLE_HOME="#{ORACLE_PATH}/instantclient_11_2"`
     else
       installed_info("orcle client")
     end
@@ -236,7 +233,7 @@ class InitOnline
   install_mysql #安装mysql
   install_redis #安装redis
   install_apache #安装apache
-  install_passenner #安装passenger
+  install_passenger #安装passenger
   install_wkhtmlpdf
   install_unoconv
   install_oracle_client
