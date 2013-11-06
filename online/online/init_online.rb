@@ -236,6 +236,7 @@ class InitOnline
     download_packets
   end
   install_depend  #安装依赖包
+  intall_git #安装git
   install_mysql #安装mysql
   install_redis #安装redis
   install_apache #安装apache

@@ -2,13 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b65cddf-c4bf-46be-af83-d93a6c77a00c" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/online/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/online/README.md" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/online/online/init_online.rb" afterPath="$PROJECT_DIR$/online/online/init_online.rb" />
     </list>
     <ignored path="ironmine_script.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/main.sh" changelist="9b65cddf-c4bf-46be-af83-d93a6c77a00c" time="1383708782886" ignored="false" />
-    <file path="/init_online.rb" changelist="9b65cddf-c4bf-46be-af83-d93a6c77a00c" time="1383721160632" ignored="false" />
+    <file path="/init_online.rb" changelist="9b65cddf-c4bf-46be-af83-d93a6c77a00c" time="1383721326051" ignored="false" />
     <file path="/Dummy.txt" changelist="9b65cddf-c4bf-46be-af83-d93a6c77a00c" time="1383720906952" ignored="false" />
+    <file path="/README.md" changelist="9b65cddf-c4bf-46be-af83-d93a6c77a00c" time="1383721494448" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,10 +31,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="init_online.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="init_online.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/online/online/init_online.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="34" selection-start="911" selection-end="911" vertical-scroll-proportion="0.43674177">
+            <state line="238" column="19" selection-start="7931" selection-end="7931" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="23" selection-start="421" selection-end="421" vertical-scroll-proportion="0.42711863">
               <folding />
             </state>
           </provider>
@@ -68,6 +80,7 @@
         <option value="$PROJECT_DIR$/online/main.sh" />
         <option value="$PROJECT_DIR$/online/init_online.rb" />
         <option value="$PROJECT_DIR$/online/online/init_online.rb" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -129,24 +142,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ironmine_script" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="online" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ironmine_script" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ironmine_script" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="online" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -392,7 +387,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/online/online/init_online.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="34" selection-start="911" selection-end="911" vertical-scroll-proportion="0.43674177">
+        <state line="238" column="19" selection-start="7931" selection-end="7931" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="23" selection-start="421" selection-end="421" vertical-scroll-proportion="0.42711863">
           <folding />
         </state>
       </provider>
