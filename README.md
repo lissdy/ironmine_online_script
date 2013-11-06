@@ -8,6 +8,7 @@ ironmine_online_script
 1、mkdir /var/datas&&cd /var/datas
 
 2、将数据库文件复制到服务器
+
 scp /path_to/irm_prod_uat_2013-07-16.sql root@XXX.XXX.XXX.XXX:/var/datas/irm_prod_uat_2013-07-16.sql
 
 3、source main.sh
@@ -15,6 +16,8 @@ scp /path_to/irm_prod_uat_2013-07-16.sql root@XXX.XXX.XXX.XXX:/var/datas/irm_pro
 4、mkdir /var/apps&&cd /var/apps
 
 5、git clone http://hismsdev.hand-china.com/gitlab/hailor/ironmine.git
+
+
 -------------------------------------------------------------------
 
 脚本运行结束：
