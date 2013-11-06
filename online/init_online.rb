@@ -1,6 +1,5 @@
 #require 'mysql'
 class InitOnline
-  RUBY_VERSION="2.0.0-p247"
   PASSENGER_DIR="/etc/httpd/conf.d/passenger.conf"
   YUM_PATH="/opt/ironmine/yum"
   PACKET_PATH="/opt/ironmine/packet"
@@ -32,11 +31,8 @@ class InitOnline
     `mkdir -p #{ORACLE_PATH}`
   end
 
-  #安装git
-  def self.install_git
-    if $download_only
-      `yum -q -y install git --downloadonly --downloaddir=#{YUM_PATH}`
-    end
+  #安装git，不提供离线安装包
+  def self.intall_git
     installing_info("git")
     `yum -q -y install git`
   end
@@ -110,7 +106,7 @@ class InitOnline
        `gem install passenger`
        `yum -q -y install curl-devel httpd-devel apr-devel apr-util-devel`
         puts "***passenger-install-apache2-module***"
-       `passenger-install-apache2-module`
+       `passenger-install-apache2-module -a`
        conf_passenger
      else
        installed_info("passenger")
@@ -239,6 +235,7 @@ class InitOnline
     download_packets
   end
   install_depend  #安装依赖包
+  intall_git #安装git
   install_mysql #安装mysql
   install_redis #安装redis
   install_apache #安装apache
