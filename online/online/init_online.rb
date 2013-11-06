@@ -32,11 +32,8 @@ class InitOnline
     `mkdir -p #{ORACLE_PATH}`
   end
 
-  #安装git
-  def self.install_git
-    if $download_only
-      `yum -q -y install git --downloadonly --downloaddir=#{YUM_PATH}`
-    end
+  #安装git，不提供离线安装包
+  def self.intall_git
     installing_info("git")
     `yum -q -y install git`
   end
