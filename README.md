@@ -20,7 +20,7 @@ scp /path_to/irm_prod_uat_2013-07-16.sql root@XXX.XXX.XXX.XXX:/var/datas/irm_pro
 
 -------------------------------------------------------------------
 
-脚本运行结束：
+项目初始化：
 
 1、cd cd /var/apps/ironmine
 
