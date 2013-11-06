@@ -11,7 +11,8 @@ ironmine_online_script
 
 3、mkdir /var/datas&&cd /var/datas
 
-4、scp /path_to/irm_prod_uat_2013-07-16.sql root@192.168.7.129:/var/datas/irm_prod_uat_2013-07-16.sql
+4、将数据库文件复制到服务器
+scp /path_to/irm_prod_uat_2013-07-16.sql root@XXX.XXX.XXX.XXX:/var/datas/irm_prod_uat_2013-07-16.sql
 
 5、source main.sh
 
