@@ -7,7 +7,7 @@ ironmine_online_script
 
 1、mkdir /var/datas&&cd /var/datas
 
-2、将数据库文件复制到服务器
+2、将本地的数据库文件复制到服务器
 
 scp /path_to/irm_prod_uat_2013-07-16.sql root@XXX.XXX.XXX.XXX:/var/datas/irm_prod_uat_2013-07-16.sql
 
