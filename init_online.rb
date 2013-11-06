@@ -41,6 +41,7 @@ class InitOnline
     `yum -q -y install git`
   end
 
+
   #安装依赖包
   def self.install_depend
     if $download_only
